@@ -13,6 +13,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{E562103B-C7F3-4BD5-831A-28E27252736A}</ProjectGuid>
     <RootNamespace>ExternalDLL</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -104,6 +105,8 @@
     <ClInclude Include="StudentExtraction.h" />
     <ClInclude Include="StudentLocalization.h" />
     <ClInclude Include="StudentPreProcessing.h" />
+    <ClInclude Include="Test.h" />
+    <ClInclude Include="Timer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DefaultExtraction.cpp" />
@@ -132,6 +135,8 @@
     <ClCompile Include="StudentExtraction.cpp" />
     <ClCompile Include="StudentLocalization.cpp" />
     <ClCompile Include="StudentPreProcessing.cpp" />
+    <ClCompile Include="Test.cpp" />
+    <ClCompile Include="Timer.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
