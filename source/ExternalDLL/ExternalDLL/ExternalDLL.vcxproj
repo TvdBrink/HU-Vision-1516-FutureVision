@@ -19,7 +19,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -51,7 +51,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(ProjectDir)\OpenCV\staticlib_x86_vc14;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)\OpenCV\staticlib_x86_vc12;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>opencv_calib3d2410.lib;opencv_contrib2410.lib;opencv_core2410.lib;opencv_features2d2410.lib;opencv_flann2410.lib;libtiff.lib;libpng.lib;libjpeg.lib;libjasper.lib;IlmImf.lib;zlib.lib;opencv_gpu2410.lib;opencv_highgui2410.lib;opencv_imgproc2410.lib;opencv_legacy2410.lib;opencv_ml2410.lib;opencv_nonfree2410.lib;opencv_objdetect2410.lib;opencv_photo2410.lib;opencv_stitching2410.lib;opencv_ts2410.lib;opencv_video2410.lib;opencv_videostab2410.lib;Vfw32.Lib;comctl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -84,6 +84,7 @@
     <ClInclude Include="Feature.h" />
     <ClInclude Include="FeatureMap.h" />
     <ClInclude Include="GrayscaleAlgorithm.h" />
+    <ClInclude Include="Histogram.h" />
     <ClInclude Include="LuminosityAlgorithm.h" />
     <ClInclude Include="SonnetXVIII.h" />
     <ClInclude Include="Image.h" />
@@ -117,6 +118,7 @@
     <ClCompile Include="Feature.cpp" />
     <ClCompile Include="FeatureMap.cpp" />
     <ClCompile Include="GrayscaleAlgorithm.cpp" />
+    <ClCompile Include="Histogram.cpp" />
     <ClCompile Include="LuminosityAlgorithm.cpp" />
     <ClCompile Include="SonnetXVIII.cpp" />
     <ClCompile Include="Image.cpp" />

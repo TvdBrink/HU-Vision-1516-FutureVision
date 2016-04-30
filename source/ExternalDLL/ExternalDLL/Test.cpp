@@ -4,8 +4,13 @@
 #include "IntensityImageStudent.h"
 #include "Timer.h"
 #include "ImageIO.h"
+#include "ImageFactory.h"
+#include "LuminosityAlgorithm.h"
+#include "Histogram.h"
 
 #include <iostream>
+#include <vector>
+#include <fstream>
 
 
 Test::Test()
@@ -17,14 +22,83 @@ Test::~Test()
 {
 }
 
+void Test::HistogramTest()
+{
+	RGBImageStudent input;
+	if (!ImageIO::loadImage("..\\..\\..\\testsets\\Set A\\TestSet Images\\female-1.png", input)) {
+		std::cout << "Image could not be loaded!" << std::endl;
+		system("pause");
+	}
+	LuminosityAlgorithm la;
+	IntensityImageStudent intesityImage(input.getWidth(), input.getHeight());
+	la.doAlgorithm(input, intesityImage);
+
+	Histogram hi(intesityImage);
+	
+	std::ofstream myfile;
+	myfile.open("..\\..\\histogram-female_1.csv");	
+
+	std::vector<int> hiData = hi.getHistogramData();
+	for (unsigned int i = 0; i < hiData.size(); ++i) {
+		myfile << i << ", " << hiData[i] << std::endl;
+		std::cout << i << ", " << hiData[i] << std::endl;
+	}
+
+	myfile.close();
+
+	///
+
+	if (!ImageIO::loadImage("..\\..\\..\\testsets\\Set A\\TestSet Images\\female-2.png", input)) {
+		std::cout << "Image could not be loaded!" << std::endl;
+		system("pause");
+	}
+
+	IntensityImageStudent intesityImage1(input.getWidth(), input.getHeight());
+	la.doAlgorithm(input, intesityImage1);
+
+	Histogram hi1(intesityImage1);
+
+	myfile.open("..\\..\\histogram-female_2.csv");
+
+	hiData = hi1.getHistogramData();
+	for (unsigned int i = 0; i < hiData.size(); ++i) {
+		myfile << i << ", " << hiData[i] << std::endl;
+		std::cout << i << ", " << hiData[i] << std::endl;
+	}
+
+	myfile.close();
+
+	///
+
+	if (!ImageIO::loadImage("..\\..\\..\\debug\\Pre-processing-4.png", input)) {
+		std::cout << "Image could not be loaded!" << std::endl;
+		system("pause");
+	}
+
+	IntensityImageStudent intesityImage2(input.getWidth(), input.getHeight());
+	la.doAlgorithm(input, intesityImage2);
+
+	Histogram hi2(intesityImage2, 50, 50, 95, intesityImage.getHeight() - 135);
+
+	myfile.open("..\\..\\histogram-female_3.csv");
+
+	hiData = hi2.getHistogramData();
+	for (unsigned int i = 0; i < hiData.size(); ++i) {
+		myfile << i << ", " << hiData[i] << std::endl;
+		std::cout << i << ", " << hiData[i] << std::endl;
+	}
+
+	myfile.close();
+}
+
 void Test::ImageShellTest()
 {
 	std::cout << "Start ImageShellTest" << std::endl;
 
 	RGBImagePrivate privateImage;
 	RGBImageStudent studentImage;
-	ImageIO::loadImage("C:\\Users\\Jeroen\\Documents\\GitHub\\HU-Vision-1516-FutureVision\\testsets\\Set A\\TestSet Images\\female-3.png", privateImage);
-	ImageIO::loadImage("C:\\Users\\Jeroen\\Documents\\GitHub\\HU-Vision-1516-FutureVision\\testsets\\Set A\\TestSet Images\\female-3.png", studentImage);
+	ImageIO::loadImage("..\\..\\..\\testsets\\Set A\\TestSet Images\\female-3.png", privateImage);
+	ImageIO::loadImage("..\\..\\..\\testsets\\Set A\\TestSet Images\\female-3.png", studentImage);
 
 	Timer t;
 	std::cout << "setPixel();" << std::endl;
