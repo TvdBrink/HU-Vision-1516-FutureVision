@@ -38,29 +38,6 @@ Histogram::~Histogram()
 {
 }
 
-std::vector<int> & Histogram::getHistogramData() {
+std::vector<int> Histogram::getHistogramData() {
 	return histogram;
 }
-
-/*std::vector<int> Histogram::getIntesityHistogram(const IntensityImage & intensityImage)
-{
-	int totalPixels = intensityImage.getHeight() * intensityImage.getWidth();
-	std::vector<int> histogram;
-	histogram.resize(256);
-	for (int i = 0; i < totalPixels; ++i) {
-		++histogram[intensityImage.getPixel(i)];
-	}
-	return histogram;
-}
-
-std::vector<int> Histogram::getYAxisHistogram(const IntensityImage & intensityImage, int relativeLeftX, int relativeRightX)
-{
-	std::vector<int> histogram;
-	histogram.resize(intensityImage.getHeight());
-	return std::vector<int>();
-}
-
-std::vector<int> Histogram::getXAxisHistogram(const IntensityImage & intensityImage, int relativeUpperY, int relativeLowerY)
-{
-	return std::vector<int>();
-}*/
