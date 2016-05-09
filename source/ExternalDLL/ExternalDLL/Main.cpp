@@ -19,7 +19,8 @@ int main(int argc, char * argv[]) {
 	//ImageFactory::setImplementation(ImageFactory::DEFAULT);
 	ImageFactory::setImplementation(ImageFactory::STUDENT);
 
-	ImageIO::debugFolder = "..\\..\\..\\debug";
+
+	ImageIO::debugFolder = "..\\..\\..\\testdebug";
 	ImageIO::isInDebugMode = true; //If set to false the ImageIO class will skip any image save function calls
 
 	RGBImage * input = ImageFactory::newRGBImage();
