@@ -7,5 +7,6 @@ public:
 	~Test();
 
 	static void ImageShellTest();
+	static void ConvolutionTest();
 };
 
