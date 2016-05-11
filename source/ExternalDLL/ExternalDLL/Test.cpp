@@ -2,11 +2,13 @@
 #include "RGBImageStudent.h"
 #include "RGBImagePrivate.h"
 #include "IntensityImageStudent.h"
+#include "LuminosityAlgorithm.h"
 #include "Timer.h"
 #include "ImageIO.h"
 #include "ImageFactory.h"
 #include "LuminosityAlgorithm.h"
 #include "Histogram.h"
+#include "ConvolutionAlgorithm.h"
 
 #include <iostream>
 #include <vector>
@@ -95,16 +97,19 @@ void Test::ImageShellTest()
 {
 	std::cout << "Start ImageShellTest" << std::endl;
 
-	RGBImagePrivate privateImage;
+	IntensityImageStudent privateImage;
 	RGBImageStudent studentImage;
-	ImageIO::loadImage("..\\..\\..\\testsets\\Set A\\TestSet Images\\female-3.png", privateImage);
 	ImageIO::loadImage("..\\..\\..\\testsets\\Set A\\TestSet Images\\female-3.png", studentImage);
+
+	privateImage.set(studentImage.getWidth(), studentImage.getHeight());
+	LuminosityAlgorithm la;
+	la.doAlgorithm(studentImage, privateImage);
 
 	Timer t;
 	std::cout << "setPixel();" << std::endl;
 	t.Start();
 	for (int i = 0; i < 10000; i++)
-		privateImage.setPixel(0, RGB(255, 255, 255));
+		privateImage.setPixel(0, Intensity(255));
 	std::cout << "Private: " << t.GetTimePassed() << " ms" << std::endl;
 	t.Restart();
 	for (int i = 0; i < 10000; i++)
@@ -124,7 +129,7 @@ void Test::ImageShellTest()
 	std::cout << "copy constructor" << std::endl;
 	t.Restart();
 	for (int i = 0; i < 100; i++)
-		RGBImagePrivate copy(privateImage);
+		IntensityImageStudent copy(privateImage);
 	std::cout << "Private: " << t.GetTimePassed() << " ms" << std::endl;
 	t.Restart();
 	for (int i = 0; i < 100; i++)
@@ -132,4 +137,23 @@ void Test::ImageShellTest()
 
 	RGBImageStudent copy(studentImage);
 	std::cout << "Student: " << t.GetTimePassed() << " ms" << std::endl;
+}
+
+void Test::ConvolutionTest()
+{
+
+	RGBImage* rgbImage = ImageFactory::newRGBImage();
+	IntensityImage* intensityImage = ImageFactory::newIntensityImage();
+	
+	ImageIO::loadImage("..\\..\\..\\testsets\\Set A\\TestSet Images\\female-3.png", *rgbImage);
+	LuminosityAlgorithm la;
+	la.doAlgorithm(*rgbImage, *intensityImage);
+
+	IntensityImage* outputImage = ImageFactory::newIntensityImage();
+	outputImage->set(intensityImage->getWidth(), intensityImage->getHeight());
+	ConvolutionAlgorithm meanAlgorithm(Kernel::meanKernel, 9);
+	meanAlgorithm.doAlgorithm(*intensityImage, *outputImage);
+
+	ImageIO::showImage(*intensityImage);
+	ImageIO::showImage(*outputImage);
 }
