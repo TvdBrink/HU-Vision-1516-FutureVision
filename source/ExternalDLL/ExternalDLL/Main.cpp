@@ -90,7 +90,7 @@ bool executeSteps(DLLExecution * executor) {
 		return false;
 	}
 
-	if (!executor->executeLocalizationStep1(false)) {
+	if (!executor->executeLocalizationStep1(true)) {
 		std::cout << "Localization step 1 failed!" << std::endl;
 		return false;
 	}
@@ -219,5 +219,5 @@ void drawFeatureDebugImage(IntensityImage &image, FeatureMap &features) {
 	ImageIO::saveRGBImage(*debug, ImageIO::getDebugFileName("feature-points-debug.png"));
 	delete debug;
 
-	Test::HistogramTest();
+	//Test::HistogramTest();
 }
