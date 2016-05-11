@@ -6,6 +6,8 @@
 
 #pragma once
 #include "Localization.h"
+#include "Histogram.h"
+
 class StudentLocalization :
 	public Localization {
 public:
