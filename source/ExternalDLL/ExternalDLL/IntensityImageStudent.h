@@ -5,8 +5,6 @@
 */
 
 #pragma once
-#include <vector>
-
 #include "IntensityImage.h"
 
 class IntensityImageStudent : public IntensityImage {
@@ -25,5 +23,5 @@ public:
 	Intensity getPixel(int x, int y) const;
 	Intensity getPixel(int i) const;
 private:
-	std::vector<Intensity> pixels;
+	Intensity* pixels;
 };
