@@ -4,7 +4,10 @@
 *.user
 *.suo
 *.opendb
-
+*.xlsx
+*.csv
+*.vspx
+*.vsp
 
 
 ExternalDLL/ExternalDLL/OpenCV/staticlib_x86_vc12/OpenCVConfig.cmake
