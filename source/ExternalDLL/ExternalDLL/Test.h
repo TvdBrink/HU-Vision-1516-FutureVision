@@ -6,6 +6,8 @@ public:
 	Test();
 	~Test();
 
+	static void HistogramTest();
+
 	static void ImageShellTest();
 	static void ConvolutionTest();
 };

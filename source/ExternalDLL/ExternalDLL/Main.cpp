@@ -9,6 +9,7 @@
 #include "HereBeDragons.h"
 #include "ImageFactory.h"
 #include "DLLExecution.h"
+#include "Test.h"
 
 void drawFeatureDebugImage(IntensityImage &image, FeatureMap &features);
 bool executeSteps(DLLExecution * executor);
@@ -17,6 +18,7 @@ int main(int argc, char * argv[]) {
 
 	//ImageFactory::setImplementation(ImageFactory::DEFAULT);
 	ImageFactory::setImplementation(ImageFactory::STUDENT);
+
 
 	ImageIO::debugFolder = "..\\..\\..\\testdebug";
 	ImageIO::isInDebugMode = true; //If set to false the ImageIO class will skip any image save function calls
@@ -41,7 +43,8 @@ int main(int argc, char * argv[]) {
 		}
 	}
 
-	system("pause");
+	Test::ImageShellTest();
+
 	return 1;
 }
 
@@ -88,7 +91,7 @@ bool executeSteps(DLLExecution * executor) {
 		return false;
 	}
 
-	if (!executor->executeLocalizationStep1(false)) {
+	if (!executor->executeLocalizationStep1(true)) {
 		std::cout << "Localization step 1 failed!" << std::endl;
 		return false;
 	}
@@ -216,4 +219,6 @@ void drawFeatureDebugImage(IntensityImage &image, FeatureMap &features) {
 
 	ImageIO::saveRGBImage(*debug, ImageIO::getDebugFileName("feature-points-debug.png"));
 	delete debug;
+
+	//Test::HistogramTest();
 }
