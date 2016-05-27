@@ -43,7 +43,8 @@ int main(int argc, char * argv[]) {
 		}
 	}
 
-	system("pause");
+	Test::ImageShellTest();
+
 	return 1;
 }
 

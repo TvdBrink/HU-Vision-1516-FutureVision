@@ -1,89 +1,77 @@
 #include "IntensityImageStudent.h"
 
-#include <iterator>
+IntensityImageStudent::IntensityImageStudent() :
+	IntensityImage()
+{
 
-IntensityImageStudent::IntensityImageStudent() : IntensityImage() {
-	//int throwError = 0, e = 1 / throwError; //Throws error without the need to include a header
-	//TODO: Nothing
 }
 
-IntensityImageStudent::IntensityImageStudent(const IntensityImageStudent &other) : IntensityImage(other.getWidth(), other.getHeight()) {
-	//int throwError = 0, e = 1 / throwError;
-	//TODO: Create a copy from the other object
+IntensityImageStudent::IntensityImageStudent(const IntensityImageStudent &other) :
+	IntensityImage(other.getWidth(), other.getHeight()),
+	pixels(new Intensity(*other.pixels)) // deep copy
+{
 
-	std::copy(other.pixels.begin(), other.pixels.end(), std::back_inserter(pixels));
 }
 
-IntensityImageStudent::IntensityImageStudent(const int width, const int height) : IntensityImage(width, height) {
-	//int throwError = 0, e = 1 / throwError;
-	//TODO: Initialize pixel storage
+IntensityImageStudent::IntensityImageStudent(const int width, const int height) :
+	IntensityImage(width, height),
+	pixels(new Intensity[width*height])
+{
 
-	set(width, height);
 }
 
-IntensityImageStudent::~IntensityImageStudent() {
-	//int throwError = 0, e = 1 / throwError;
-	//TODO: delete allocated objects
+IntensityImageStudent::~IntensityImageStudent()
+{
+	if (pixels != nullptr)
+		delete[] pixels;
 }
 
-void IntensityImageStudent::set(const int width, const int height) {
+void IntensityImageStudent::set(const int width, const int height)
+{
+	if (this->getWidth() == width && this->getHeight() == height)
+		return; // Width and height are the same. No need for resizing.
+
 	IntensityImage::set(width, height);
-	//int throwError = 0, e = 1 / throwError;
-	//TODO: resize or create a new pixel storage (Don't forget to delete the old storage)
-
-	pixels.resize(width*height);
+	
+	if(pixels != nullptr)
+		delete[] pixels;
+	pixels = new Intensity[width*height];
 }
 
-void IntensityImageStudent::set(const IntensityImageStudent &other) {
+void IntensityImageStudent::set(const IntensityImageStudent &other)
+{
+	if (this->getWidth() == other.getWidth() && this->getHeight() == other.getHeight())
+		return; // Width and height are the same. No need for resizing.
+
 	IntensityImage::set(other.getWidth(), other.getHeight());
-	//int throwError = 0, e = 1 / throwError;
-	//TODO: resize or create a new pixel storage and copy the object (Don't forget to delete the old storage)
 
-	set(other.getWidth(), other.getHeight());
+	if (pixels != nullptr)
+		delete[] pixels;
+	pixels = new Intensity(*other.pixels); // deep copy
 }
 
-void IntensityImageStudent::setPixel(int x, int y, Intensity pixel) {
-	//int throwError = 0, e = 1 / throwError;
-	//TODO: no comment needed :)
-
-	pixels[x + y * getWidth()] = pixel;
+void IntensityImageStudent::setPixel(int x, int y, Intensity pixel)
+{
+	if(pixels != nullptr)
+		pixels[x + y * getWidth()] = pixel;
 }
 
-void IntensityImageStudent::setPixel(int i, Intensity pixel) {
-	//int throwError = 0, e = 1 / throwError;
-	/*
-	* TODO: set pixel i in "Row-Major Order"
-	*
-	*
-	* Original 2d image (values):
-	* 9 1 2
-	* 4 3 5
-	* 8 7 8
-	*
-	* 1d representation (i, value):
-	* i		value
-	* 0		9
-	* 1		1
-	* 2		2
-	* 3		4
-	* 4		3
-	* 5		5
-	* 6		8
-	* 7		7
-	* 8		8
-	*/
-
-	pixels[i] = pixel;
+void IntensityImageStudent::setPixel(int i, Intensity pixel)
+{
+	if (pixels != nullptr)
+		pixels[i] = pixel;
 }
 
-Intensity IntensityImageStudent::getPixel(int x, int y) const {
-	//int throwError = 0, e = 1 / throwError;
-	//TODO: no comment needed :)
-	return pixels[x + y * getWidth()];
+Intensity IntensityImageStudent::getPixel(int x, int y) const
+{
+	if (pixels != nullptr)
+		return pixels[x + y * getWidth()];
+	return -1;
 }
 
-Intensity IntensityImageStudent::getPixel(int i) const {
-	//int throwError = 0, e = 1 / throwError;
-	//TODO: see setPixel(int i, RGB pixel)
-	return pixels[i];
+Intensity IntensityImageStudent::getPixel(int i) const
+{
+	if (pixels != nullptr)
+		return pixels[i];
+	return -1;
 }
